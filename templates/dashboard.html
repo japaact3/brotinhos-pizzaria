@@ -55,4 +55,35 @@
 
 </div>
 
+<button class="danger-btn" onclick="abrirModalReset()">
+    🧹 Resetar Semana
+</button>
+
+<div id="modalReset" class="modal-reset">
+
+    <div class="modal-box">
+
+        <h2>⚠️ Atenção</h2>
+
+        <p>
+            Isso vai apagar TODOS os pedidos.<br>
+            Essa ação não pode ser desfeita.
+        </p>
+
+        <div class="modal-actions">
+
+            <button onclick="fecharModalReset()" class="btn-cancel">
+                Cancelar
+            </button>
+
+            <button onclick="confirmarReset()" class="btn-danger">
+                Sim, resetar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}

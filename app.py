@@ -191,6 +191,18 @@ def dashboard():
 
 
 
+@app.route("/reset-semana", methods=["POST"])
+def reset_semana():
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM pedidos")
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({"ok": True})
+
 
 
 
@@ -202,6 +214,7 @@ STATUS = {
     "cancelado": "🔴 Cancelado"
 }
 
+app.secret_key = "1609tst"
 
 if __name__ == "__main__":
     app.run()
