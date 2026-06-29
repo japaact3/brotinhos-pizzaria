@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard">
+
+    <h2>Painel Principal</h2>
+
+    <a href="{{ url_for('novo_pedido') }}" class="menu-card">
+        <div class="icone">🍕</div>
+        <div>
+            <div class="titulo">Novo Pedido</div>
+            <div class="descricao">Cadastrar um novo pedido</div>
+        </div>
+    </a>
+
+    <a href="{{ url_for('lista_pedidos') }}" class="menu-card">
+        <div class="icone">📋</div>
+        <div>
+            <div class="titulo">Pedidos</div>
+            <div class="descricao">Visualizar todos os pedidos</div>
+        </div>
+    </a>
+
+</div>
+
+<!-- 📊 DASHBOARD STATS -->
+<h2 class="titulo-dashboard">📊 Dashboard</h2>
+
+<div class="dashboard-grid">
+
+    <div class="card">
+        <h3>💰 Vendas</h3>
+        <p>R$ {{ total_vendas }}</p>
+    </div>
+
+    <div class="card">
+        <h3>📦 Pedidos</h3>
+        <p>{{ total_pedidos }}</p>
+    </div>
+
+    <div class="card">
+        <h3>🟡 Em Produção</h3>
+        <p>{{ em_preparo }}</p>
+    </div>
+
+    <div class="card destaque">
+        <h3>📈 Ticket Médio</h3>
+        <p>R$ {{ ticket }}</p>
+    </div>
+
+</div>
+
+{% endblock %}

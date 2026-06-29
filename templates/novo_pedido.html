@@ -1,0 +1,197 @@
+{% extends "layout.html" %}
+
+{% block css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/forms.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/modal.css') }}">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/pedidos.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="pedido-container">
+
+    <!-- Dados do cliente -->
+
+    <div class="card">
+
+        <h2>Novo Pedido</h2>
+
+        <form id="formPedido">
+
+            <input
+                type="text" id="nome"
+                placeholder="Nome do cliente">
+
+            <input
+                type="text" id="telefone"
+                placeholder="Telefone">
+
+            <input
+                type="text" id="endereco"
+                placeholder="Endereço">
+
+        </form>
+
+    </div>
+
+    <!-- Carrinho -->
+
+    <div class="card">
+
+        <div class="titulo-card">
+
+            <h3>🛒 Carrinho</h3>
+
+            <button
+                type="button"
+                onclick="abrirModal()">
+
+                + Produto
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<!-- Rodapé -->
+
+<div class="footer-total">
+
+    <div>
+
+        <small>Total</small>
+
+        <h2 id="valorTotal">
+
+            R$ 0,00
+
+        </h2>
+
+    </div>
+
+    <button type="button" onclick="finalizarPedido()">
+
+        Finalizar
+
+    </button>
+
+</div>
+
+
+
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h3>🍕 Adicionar Produtos</h3>
+
+            <button type="button" onclick="fecharModal()">✖</button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <!-- CALABRESA -->
+            <div class="produto">
+
+                <div class="info">
+                    🍕 Calabresa <br>
+                    <small>R$ 4,50</small>
+                </div>
+
+                <div class="controls">
+
+                    <button onclick="alterarQtd(1, 'Calabresa', 4.5, -1)">-</button>
+
+                    <span id="qtd-1">0</span>
+
+                    <button id="btn-1" onclick="alterarQtd(1, 'Calabresa', 4.5, 1)">+</button>
+
+                </div>
+
+            </div>
+
+            <!-- PORTUGUESA -->
+            <div class="produto">
+
+                <div class="info">
+                    🍕 Frango <br>
+                    <small>R$ 4,50</small>
+                </div>
+
+                <div class="controls">
+
+                    <button onclick="alterarQtd(2, 'Frango', 4.5, -1)">-</button>
+
+                    <span id="qtd-2">0</span>
+
+                    <button id="btn-1" onclick="alterarQtd(2, 'Frango', 4.5, 1)">+</button>
+
+                </div>
+
+            </div>
+
+            <!-- COCA -->
+            <div class="produto">
+
+                <div class="info">
+                    🍕 Frango Catupiry <br>
+                    <small>R$ 4,50</small>
+                </div>
+
+                <div class="controls">
+
+                    <button onclick="alterarQtd(3, 'Frango-Catupiry', 4.5, -1)">-</button>
+
+                    <span id="qtd-3">0</span>
+
+                    <button id="btn-1" onclick="alterarQtd(3, 'Frango-Catupiry', 4.5, 1)">+</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button onclick="fecharModal()">Confirmar</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/carrinho.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/pedido.js') }}"></script>
+

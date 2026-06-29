@@ -1,0 +1,126 @@
+/* ===========================
+   DASHBOARD
+=========================== */
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.titulo-dashboard {
+    font-size: 22px;
+    margin: 20px 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* grid responsivo */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+/* cards */
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+/* hover elegante */
+.card:hover {
+    transform: translateY(-3px);
+}
+
+/* textos */
+.card h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 20px;
+    font-weight: bold;
+    color: #222;
+}
+
+/* card destaque (ticket médio) */
+.card.destaque {
+    background: linear-gradient(135deg, #ffcc70, #ff8a00);
+    color: white;
+}
+
+.card.destaque h3,
+.card.destaque p {
+    color: white;
+}
+
+/* Título */
+
+.dashboard h2 {
+    font-size: 22px;
+    color: #333;
+}
+
+/* Cards do menu */
+
+.menu-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    text-decoration: none;
+    color: #333;
+
+    transition: .2s;
+}
+
+.menu-card:hover {
+    transform: translateY(-2px);
+}
+
+.menu-card .icone {
+    font-size: 32px;
+}
+
+.menu-card .titulo {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.menu-card .descricao {
+    color: #666;
+    font-size: 14px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card h3 {
+    margin: 0;
+    color: #e74c3c;
+}
+
+

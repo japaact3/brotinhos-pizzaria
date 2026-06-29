@@ -1,0 +1,41 @@
+/* MODAL DE SELEÇÃO DE SABORES*/
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: #fff;
+    width: 92%;
+    max-height: 80%;
+    overflow-y: auto;
+    border-radius: 14px;
+    padding: 15px;
+}
+
+.modal-header,
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.controls button {
+    width: 32px;
+    height: 32px;
+}

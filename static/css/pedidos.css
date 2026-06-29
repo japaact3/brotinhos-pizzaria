@@ -1,0 +1,78 @@
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.item button {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    background: #b71c1c;
+    color: white;
+    font-size: 18px;
+}
+
+.item span {
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+.status-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* botão base */
+.btn-status {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* hover geral */
+.btn-status:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* cores por status */
+.btn-status.preparo {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.btn-status.pronto {
+    background: #d4edda;
+    color: #155724;
+}
+
+.btn-status.entrega {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.btn-status.entregue {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.btn-status.cancelado {
+    background: #f8d7da;
+    color: #721c24;
+}

@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: rgb(225, 226, 165);
+}
+
+/* APP CONTAINER */
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* TOP BAR */
+.topbar {
+    background: #b71c1c;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+.logo {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    padding: 15px;
+    padding-bottom: 80px;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    font-size: 10px;
+    color: #444;
+}
+
+/* CARD BASE (vamos usar depois) */
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.card a {
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 6px;
+    border-radius: 8px;
+    background: #eee;
+}
+
+.card a:hover {
+    background: #ddd;
+}
+
+
+
+
+
+
+
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+
+    transition: 0.1s;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+a {
+    color: #b71c1c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+#splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgb(225, 226, 165);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+#splash img {
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%; /* <- deixa o ícone redondo na splash */
+    object-fit: cover;
+
+    animation: pulse 1.5s infinite;
+}
+
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+
+    min-width: 220px;
+    max-width: 90%;
+
+    padding: 12px 16px;
+    border-radius: 12px;
+
+    color: white;
+    font-size: 14px;
+    text-align: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: 0.3s ease;
+
+    z-index: 99999;
+}
+
+/* ANIMAÇÃO ENTRADA */
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* TIPOS */
+.toast.success {
+    background: #2ecc71;
+}
+
+.toast.error {
+    background: #e74c3c;
+}
+
+.toast.warning {
+    background: #f39c12;
+}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pedidos.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h2>Pedidos 📋</h2>
+
+<a href="/novo-pedido">+ Novo Pedido</a>
+
+<br><br>
+
+{% for p in pedidos %}
+
+<div class="card">
+
+    <strong>Pedido #{{ p.id }}</strong><br><br>
+
+    👤 {{ p.nome }} <br>
+    📱 {{ p.telefone }} <br>
+    🏠 {{ p.endereco }} <br>
+    💳 {{ p.pagamento }} <br><br>
+
+    <b>🍕 Itens:</b><br>
+
+    {% for item in p.itens %}
+
+        {{ item.quantidade }}x {{ item.nome }}
+        - R$ {{ item.subtotal }} <br>
+
+    {% endfor %}
+
+    <br>
+
+    <b>Total: R$ {{ p.total }}</b><br><br>
+
+    <b>{{ p.status }}</b>
+
+    <br><br>
+
+    <div class="status-buttons">
+
+        <button class="btn-status preparo" onclick="alterarStatus({{ p.id }}, 'preparo')">
+            🟡 Em preparo
+        </button>
+
+        <button class="btn-status pronto" onclick="alterarStatus({{ p.id }}, 'pronto')">
+            🟢 Pronto
+        </button>
+
+        <button class="btn-status entrega" onclick="alterarStatus({{ p.id }}, 'saida')">
+            🚚 Saindo
+        </button>
+
+        <button class="btn-status entregue" onclick="alterarStatus({{ p.id }}, 'entregue')">
+            ✅ Entregue
+        </button>
+
+        <button class="btn-status cancelado" onclick="alterarStatus({{ p.id }}, 'cancelado')">
+            🔴 Cancelar
+        </button>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/pedido.js') }}"></script>
+
+{% endfor %}
+
+{% endblock %}

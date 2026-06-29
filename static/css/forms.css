@@ -1,0 +1,27 @@
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #b71c1c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+a {
+    color: #b71c1c;
+    text-decoration: none;
+    font-weight: bold;
+}

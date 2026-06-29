@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#e74c3c">
+
+    <title>Brotinhos do Galego</title>
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- CSS específico da página -->
+    {% block css %}{% endblock %}
+</head>
+
+<body>
+
+
+    <div id="splash">
+        <img src="{{ url_for('static', filename='img/logo.png') }}">
+        <h2>Brotinhos do Galego</h2>
+    </div>
+
+
+
+    <div class="app">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+            <img src="{{ url_for('static', filename='img/logo.png') }}" class="logo">
+
+            BROTINHOS DO GALEGO
+        </header>
+
+        <!-- CONTEÚDO -->
+        <main class="content">
+
+            {% block content %}
+            {% endblock %}
+
+        </main>
+
+        <!-- MENU INFERIOR -->
+        <nav class="bottom-nav">
+
+    <a href="{{ url_for('dashboard') }}">🏠 Inicio</a>
+
+    <a href="{{ url_for('lista_pedidos') }}">📋 Pedidos</a>
+
+    <a href="{{ url_for('novo_pedido') }}">🍕 Novo Pedido </a>
+
+    <a onclick="emBreve()"  href="#">🚚 Entregas</a>
+
+    <a onclick="emBreve()" href="#">⚙ Configurações</a>
+
+</nav>
+
+    </div>
+
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/carrinho.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/pedido.js') }}"></script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js')
+    .then(() => console.log("SW ativo"));
+}
+</script>
+
+<script>
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+    }, 1500);
+});
+</script>
+
+
+<div id="toast" class="toast"></div>
+
+
+</body>
+
+</html>
