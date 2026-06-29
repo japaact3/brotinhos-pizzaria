@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for, jsonify, send_file
 
 import sqlite3
 
 import json
+
+from reportlab.lib.pagesizes import letter
+
+import os
+from datetime import datetime
+from reportlab.pdfgen import canvas
 
 
 
@@ -193,15 +199,33 @@ def dashboard():
 
 @app.route("/reset-semana", methods=["POST"])
 def reset_semana():
+
     conn = conectar()
     cursor = conn.cursor()
 
+    cursor.execute("SELECT * FROM pedidos")
+    rows = cursor.fetchall()
+
+    pedidos = []
+
+    for r in rows:
+        pedidos.append({
+            "id": r[0],
+            "nome": r[1],
+            "total": r[5],
+            "status": r[6]
+        })
+
+    # gerar PDF antes de apagar
+    gerar_relatorio_pdf(pedidos)
+
+    # apagar banco
     cursor.execute("DELETE FROM pedidos")
 
     conn.commit()
     conn.close()
 
-    return jsonify({"ok": True})
+    return jsonify({"ok": True, "msg": "Semana resetada e relatório gerado"})
 
 
 
@@ -213,6 +237,47 @@ STATUS = {
     "entregue": "✅ Entregue",
     "cancelado": "🔴 Cancelado"
 }
+
+def gerar_relatorio_pdf(pedidos):
+
+    if not os.path.exists("relatorios"):
+        os.makedirs("relatorios")
+
+    data = datetime.now().strftime("%Y-%m-%d_%H-%M")
+
+    nome_arquivo = f"relatorios/relatorio_{data}.pdf"
+
+    c = canvas.Canvas(nome_arquivo)
+
+    y = 750
+    total = 0
+
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(180, y, "Relatório Semanal - Pizzaria")
+    y -= 40
+
+    c.setFont("Helvetica", 10)
+
+    for p in pedidos:
+        linha = f"{p['id']} - {p['nome']} - R$ {p['total']} - {p['status']}"
+        c.drawString(50, y, linha)
+        y -= 20
+
+        total += float(p["total"])
+
+        if y < 50:
+            c.showPage()
+            y = 750
+
+    y -= 20
+    c.drawString(50, y, f"TOTAL: R$ {total:.2f}")
+
+    c.save()
+
+    return send_file(nome_arquivo, as_attachment=True)
+
+    return nome_arquivo
+
 
 app.secret_key = "1609tst"
 
