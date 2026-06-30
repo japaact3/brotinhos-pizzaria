@@ -50,6 +50,9 @@ body::before {
     display: flex;
     align-items: center;
     gap: 10px;
+
+    
+    z-index: 9999;
 }
 
 
@@ -73,6 +76,9 @@ body::before {
 
 /* BOTTOM NAV */
 .bottom-nav {
+
+    z-index: 9999;
+
     position: fixed;
     bottom: 0;
     left: 0;
@@ -249,9 +255,9 @@ a {
     background-position: center;
     background-size: contain;
 
-    opacity: 0.03; /* bem leve mesmo */
+    opacity: 0.03;
 
     z-index: 0;
 
-    pointer-events: none;
+    pointer-events: none; /* 👈 ESSENCIAL */
 }
