@@ -4,11 +4,11 @@ import sqlite3
 
 import json
 
-from reportlab.lib.pagesizes import letter
+
 
 import os
 from datetime import datetime
-from reportlab.pdfgen import canvas
+
 
 
 
