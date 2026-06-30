@@ -216,8 +216,6 @@ def reset_semana():
             "status": r[6]
         })
 
-    # gerar PDF antes de apagar
-    gerar_relatorio_pdf(pedidos)
 
     # apagar banco
     cursor.execute("DELETE FROM pedidos")
@@ -237,46 +235,6 @@ STATUS = {
     "entregue": "✅ Entregue",
     "cancelado": "🔴 Cancelado"
 }
-
-def gerar_relatorio_pdf(pedidos):
-
-    if not os.path.exists("relatorios"):
-        os.makedirs("relatorios")
-
-    data = datetime.now().strftime("%Y-%m-%d_%H-%M")
-
-    nome_arquivo = f"relatorios/relatorio_{data}.pdf"
-
-    c = canvas.Canvas(nome_arquivo)
-
-    y = 750
-    total = 0
-
-    c.setFont("Helvetica-Bold", 14)
-    c.drawString(180, y, "Relatório Semanal - Pizzaria")
-    y -= 40
-
-    c.setFont("Helvetica", 10)
-
-    for p in pedidos:
-        linha = f"{p['id']} - {p['nome']} - R$ {p['total']} - {p['status']}"
-        c.drawString(50, y, linha)
-        y -= 20
-
-        total += float(p["total"])
-
-        if y < 50:
-            c.showPage()
-            y = 750
-
-    y -= 20
-    c.drawString(50, y, f"TOTAL: R$ {total:.2f}")
-
-    c.save()
-
-    return send_file(nome_arquivo, as_attachment=True)
-
-    return nome_arquivo
 
 
 app.secret_key = "1609tst"
