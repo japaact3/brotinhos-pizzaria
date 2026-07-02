@@ -329,3 +329,27 @@ def buscar_usuario(usuario):
         "nivel": row[4],
         "ativo": row[5]
     }
+
+
+def criar_admin_padrao():
+    conn = conectar()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM usuarios WHERE usuario = ?", ("admin",))
+    existe = cursor.fetchone()
+
+    if not existe:
+        cursor.execute("""
+            INSERT INTO usuarios (nome, usuario, senha, nivel, ativo)
+            VALUES (?, ?, ?, ?, ?)
+        """, (
+            "Administrador",
+            "admin",
+            generate_password_hash("123456"),
+            "admin",
+            1
+        ))
+
+        conn.commit()
+
+    conn.close()

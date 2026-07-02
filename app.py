@@ -40,9 +40,12 @@ def index():
 
 from database import criar_tabela_usuarios
 from database import criar_admin
+from database import criar_admin_padrao
 
 criar_tabela_usuarios()
 criar_admin()
+
+criar_admin_padrao()
 
 app.register_blueprint(cliente_bp)
 app.register_blueprint(admin_bp)
