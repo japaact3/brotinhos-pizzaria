@@ -15,7 +15,7 @@ function fecharModalReset() {
 }
 
 function confirmarReset() {
-    fetch("/reset-semana", {
+    fetch("/api/reset-semana", {
         method: "POST"
     })
     .then(res => res.json())

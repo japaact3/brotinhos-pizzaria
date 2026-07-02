@@ -1,0 +1,122 @@
+{% extends "cliente/layout_cliente.html" %}
+
+{% block titulo %}
+Fazer Pedido
+{% endblock %}
+
+{% block content %}
+
+<section class="pedido">
+
+    <!-- HEADER DA PÁGINA -->
+
+    <div class="pedido-header">
+
+        <h2>Monte seu pedido</h2>
+
+        <p>Escolha seus sabores favoritos</p>
+
+    </div>
+
+    <!-- LISTA DE PRODUTOS -->
+
+    <div class="lista-produtos">
+
+        {% for produto in produtos %}
+
+        <div class="produto-card">
+
+            <!-- IMAGEM -->
+
+            <div class="produto-imagem">
+
+                <img src="{{ url_for('static', filename='img/pizzacardteste.jfif') }}">
+
+            </div>
+
+            <!-- INFO -->
+
+            <div class="produto-info">
+
+                <h3>{{ produto.nome }}</h3>
+
+                <p>{{ produto.descricao }}</p>
+
+                <span class="preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+
+            </div>
+
+            <!-- CONTROLES -->
+
+            <div class="produto-acoes">
+
+                <button class="menos"
+                    onclick="clicar(this, -1)"
+                    data-id="{{ produto.id }}"
+                    data-nome="{{ produto.nome }}"
+                    data-preco="{{ produto.preco }}">
+                    −
+                </button>
+
+                <span id="qtd-{{ produto.id }}" class="quantidade">0</span>
+
+                <button class="mais"
+                    onclick="clicar(this, 1)"
+                    data-id="{{ produto.id }}"
+                    data-nome="{{ produto.nome }}"
+                    data-preco="{{ produto.preco }}">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- BOTÃO FLUTUANTE -->
+<button class="btn-carrinho-fixo" onclick="abrirCarrinho()">
+    🛒 Carrinho
+    <span id="contadorCarrinho">0</span>
+</button>
+
+<!-- CARRINHO -->
+<div id="bottomSheet" class="bottom-sheet">
+
+    <div class="sheet-header">
+        <h3>Seu Pedido</h3>
+        <button onclick="fecharCarrinho()">✕</button>
+    </div>
+
+    <div id="listaCarrinho" class="lista-carrinho">
+        <p class="vazio">Carrinho vazio</p>
+    </div>
+
+    <div class="total">
+        <span>Total</span>
+        <strong id="valorTotal">R$ 0,00</strong>
+    </div>
+
+    <div class="cliente">
+        <input id="nome" placeholder="Nome">
+        <input id="telefone" placeholder="Telefone">
+        <input id="endereco" placeholder="Endereço">
+    </div>
+
+    <button class="btn-finalizar" onclick="finalizarPedido()">
+        Finalizar Pedido
+    </button>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="{{ url_for('static', filename='js/carrinho_clt.js') }}"></script>
+
+{% endblock %}

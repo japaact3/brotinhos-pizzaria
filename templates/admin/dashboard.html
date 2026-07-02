@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "admin/layout_admin.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
@@ -10,7 +10,7 @@
 
     <h2>Painel Principal</h2>
 
-    <a href="{{ url_for('novo_pedido') }}" class="menu-card">
+    <a href="{{ url_for('admin.novo_pedido') }}" class="menu-card">
         <div class="icone">🍕</div>
         <div>
             <div class="titulo">Novo Pedido</div>
@@ -18,7 +18,7 @@
         </div>
     </a>
 
-    <a href="{{ url_for('lista_pedidos') }}" class="menu-card">
+    <a href="{{ url_for('admin.lista_pedidos') }}" class="menu-card">
         <div class="icone">📋</div>
         <div>
             <div class="titulo">Pedidos</div>

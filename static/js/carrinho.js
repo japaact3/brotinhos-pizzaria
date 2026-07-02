@@ -1,5 +1,9 @@
 let carrinho = {};
 
+// =====================================================
+// ALTERAR QUANTIDADE
+// =====================================================
+
 function alterarQtd(id, nome, preco, valor) {
 
     if (!carrinho[id]) {
@@ -23,8 +27,6 @@ function alterarQtd(id, nome, preco, valor) {
     atualizarInterface(id);
     atualizarTotal();
 
-    // 🔥 FEEDBACK EM TEMPO REAL
-
     if (valor > 0) {
         mostrarToast(`+ ${nome} adicionado`, "success");
     }
@@ -38,18 +40,22 @@ function alterarQtd(id, nome, preco, valor) {
     }
 }
 
-
-
-
+// =====================================================
+// INTERFACE
+// =====================================================
 
 function atualizarInterface(id) {
 
     let el = document.getElementById(`qtd-${id}`);
 
-    if (el) {
+    if (el && carrinho[id]) {
         el.innerText = carrinho[id].quantidade;
     }
 }
+
+// =====================================================
+// TOTAL
+// =====================================================
 
 function atualizarTotal() {
 
@@ -66,22 +72,17 @@ function atualizarTotal() {
     }
 }
 
-
 function calcularTotal() {
 
-    let total = 0;
-
-    for (let id in carrinho) {
-
-        if (carrinho[id].quantidade > 0) {
-            total += carrinho[id].preco * carrinho[id].quantidade;
-        }
-
-    }
-
-    return total;
+    return Object.values(carrinho)
+        .reduce((acc, item) => {
+            return acc + (item.preco * item.quantidade);
+        }, 0);
 }
 
+// =====================================================
+// FINALIZAR PEDIDO
+// =====================================================
 
 function finalizarPedido() {
 
@@ -89,29 +90,13 @@ function finalizarPedido() {
     let telefone = document.getElementById("telefone").value;
     let endereco = document.getElementById("endereco").value;
 
-    // 🚨 validação
-    if (!nome) {
-        mostrarToast("Digite o nome do cliente", "error");
+    if (!nome || !telefone || !endereco) {
+        mostrarToast("Preencha todos os campos", "error");
         return;
     }
 
-    if (!telefone) {
-        mostrarToast("Digite o telefone", "error");
-        return;
-    }
-
-    if (!endereco) {
-        mostrarToast("Digite o endereço", "error");
-        return;
-    }
-
-    let itens = [];
-
-    for (let id in carrinho) {
-        if (carrinho[id].quantidade > 0) {
-            itens.push(carrinho[id]);
-        }
-    }
+    let itens = Object.values(carrinho)
+        .filter(i => i.quantidade > 0);
 
     if (itens.length === 0) {
         mostrarToast("Adicione pelo menos 1 produto", "error");
@@ -129,59 +114,72 @@ function finalizarPedido() {
     enviarPedido(pedido);
 }
 
-
-
-
-
+// =====================================================
+// ENVIO (CORRIGIDO)
+// =====================================================
 
 function enviarPedido(pedido) {
 
-    fetch("/novo-pedido", {
+    fetch("/admin/novo-pedido", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(pedido)
     })
-    .then(res => res.json())
+    .then(async res => {
+
+        // 🔥 evita erro "Unexpected token <"
+        const data = await res.json().catch(() => null);
+
+        if (!res.ok) {
+            throw new Error(data?.erro || "Erro no servidor");
+        }
+
+        return data;
+    })
     .then(data => {
 
         mostrarToast("Pedido enviado com sucesso!", "success");
 
-        // limpa carrinho
         carrinho = {};
         atualizarTotal();
 
-        // recarrega página (opcional)
         location.reload();
-
     })
     .catch(err => {
-        mostrarToast("Erro ao enviar pedido:", "error");
+
+        console.error(err);
+
+        mostrarToast(err.message || "Erro ao enviar pedido", "error");
     });
 }
+
+// =====================================================
+// TOAST
+// =====================================================
 
 function mostrarToast(mensagem, tipo = "error") {
 
     let toast = document.getElementById("toast");
 
-    // limpa classes antigas
-    toast.className = "toast";
+    if (!toast) return;
 
-    // adiciona tipo
+    toast.className = "toast";
     toast.classList.add(tipo);
 
-    // texto
     toast.innerText = mensagem;
 
-    // mostra
     toast.classList.add("show");
 
-    // remove automático
     setTimeout(() => {
         toast.classList.remove("show");
     }, 2500);
 }
+
+// =====================================================
+// FEEDBACK BOTÃO
+// =====================================================
 
 function feedbackBotao(id) {
 

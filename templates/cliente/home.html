@@ -1,0 +1,23 @@
+{% extends "cliente/layout_cliente.html" %}
+
+{% block content %}
+
+<section class="home">
+
+    <div class="home-container">
+
+        <h1>Bem-vindo ao Brothinhos Do Galego</h1>
+
+        <p>O melhor brotinho da cidade, feito na hora e entregue rápida</p>
+
+        <a href="{{ url_for('cliente.pedido') }}" class="btn-iniciar">
+            Fazer Pedido
+        </a>
+
+    </div>
+
+</section>
+
+{% block body_class %}home-fix{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block titulo %}
+            Brothinhos Do Galego
+        {% endblock %}
+    </title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+    <!-- ===================================================
+         HEADER
+    ==================================================== -->
+
+    <header class="topbar">
+
+        <div class="topbar-logo">
+
+            <img src="{{ url_for('static', filename='img/logo.png') }}"
+                 alt="Brothinhos Galego">
+
+            <div>
+
+                <h1>Brothinhos Galego</h1>
+
+                <span>Delivery de Brotinhos</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ===================================================
+         CONTEÚDO
+    ==================================================== -->
+
+    <main class="conteudo">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <!-- ===================================================
+         BOTÃO FLUTUANTE DO CARRINHO
+         (ficará oculto nas páginas que não usam carrinho)
+    ==================================================== -->
+
+
+    <!-- ===================================================
+         OVERLAY
+    ==================================================== -->
+
+    <div id="overlay" class="overlay"></div>
+
+    <!-- ===================================================
+         TOAST
+    ==================================================== -->
+
+    <div id="toast" class="toast"></div>
+
+    <!-- ===================================================
+         JS
+    ==================================================== -->
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+
+</html>
+

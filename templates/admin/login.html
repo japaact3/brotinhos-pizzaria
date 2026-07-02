@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Login - Brotinhos Do Galego</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/login.css') }}">
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <img src="{{ url_for('static', filename='img/logo.png') }}"
+         class="logo">
+
+    <h2>Painel Administrativo</h2>
+
+    {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+            {% for categoria, mensagem in mensagens %}
+
+                <div class="alert {{ categoria }}">
+
+                    {{ mensagem }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="usuario"
+            placeholder="Usuário"
+            required>
+
+        <input
+            type="password"
+            name="senha"
+            placeholder="Senha"
+            required>
+
+        <button>
+
+            Entrar
+
+        </button>
+
+
+        <div class="cliente-area">
+
+            <p class="texto-ou">ou</p>
+
+            <a href="{{ url_for('cliente.home') }}" class="btn-cliente">
+
+                Fazer pedido
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>

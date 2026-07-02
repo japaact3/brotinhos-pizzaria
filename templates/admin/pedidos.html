@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "admin/layout_admin.html" %}
 
 {% block css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pedidos.css') }}">
@@ -8,7 +8,7 @@
 
 <h2>Pedidos 📋</h2>
 
-<a href="/novo-pedido">+ Novo Pedido</a>
+<a href="/admin/novo-pedido">+ Novo Pedido</a>
 
 <br><br>
 
@@ -67,6 +67,10 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/pedido.js') }}"></script>
+
+<script>
+    atualizarPedidos();
+</script>
 
 {% endfor %}
 
