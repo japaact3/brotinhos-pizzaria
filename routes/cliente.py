@@ -17,6 +17,8 @@ from database import (
     conectar
 )
 
+import urllib.parse
+
 import json
 
 cliente_bp = Blueprint("cliente", __name__)
@@ -61,4 +63,24 @@ def novo_pedido():
 
     salvar_pedido(dados)
 
-    return jsonify({"status": "ok"})
+    #numero do cliente ja vem do formulario
+    numero = dados.get("telefone", "").replace(" ", "").replace("-", "")
+
+    mensagem = f""" Pedido Recebido!
+
+    Nome : {dados.get('nome')}
+    Total : R$ {dados.get('total')}
+
+    Status : Em Preparo...
+    
+    """
+
+    msg_encoded = urllib.parse.quote(mensagem)
+
+    link = f"https://wa.me/55{numero}?text={msg_encoded}"
+    
+
+    return jsonify({
+        "status": "ok",
+        "whatsapp": link
+    })

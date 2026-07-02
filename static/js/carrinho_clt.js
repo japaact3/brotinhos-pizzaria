@@ -135,9 +135,9 @@ function finalizarPedido() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(pedido)
-    })
-    .then(res => res.json())
-    .then(data => {
+        })
+        .then(res => res.json())
+        .then(data => {
 
         mostrarToast("Pedido enviado com sucesso!", "success");
 
@@ -145,6 +145,12 @@ function finalizarPedido() {
         renderCarrinho();
 
         fecharCarrinho();
+
+        /* Abre o wpp*/
+
+        if (data.whatsapp) {
+            window.open(data.whatsapp, "_blank");
+        }
 
     })
     .catch(err => {
