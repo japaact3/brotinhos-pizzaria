@@ -25,7 +25,8 @@ from database import (
 import json
 
 
-from flask import Flask
+import os
+
 
 from routes.cliente import cliente_bp
 from routes.admin import admin_bp
@@ -46,6 +47,8 @@ criar_admin()
 app.register_blueprint(cliente_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(api_bp)
+
+app.secret_key = os.environ.get("SECRET_KEY", "dev-secret")
 
 
 if __name__ == "__main__":
